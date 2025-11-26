@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Đăng ký tuyển dụng · Sen Việt Group</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --sv-orange: #e57200;
+      --sv-green: #0b6b2e;
+      --sv-pink-soft: #ffeaf4;
+      --sv-bg: #fff7f2;
+      --sv-border: #e5e7eb;
+      --sv-text-main: #111827;
+      --sv-text-sub: #6b7280;
+      --radius-card: 20px;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 24px 12px 32px;
+      background: radial-gradient(circle at top left, #ffe3f2 0, #fff7f0 35%, #ffffff 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      color: var(--sv-text-main);
+    }
+
+    .sv-shell {
+      width: 100%;
+      max-width: 1200px;
+      background: linear-gradient(135deg, #ffffff 0, #fff7f2 40%, #ffece0 100%);
+      border-radius: 26px;
+      box-shadow: var(--shadow-soft);
+      padding: 18px 18px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sv-shell::before {
+      content: "";
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(229, 114, 0, 0.18), transparent 65%);
+      top: -140px;
+      right: -80px;
+      pointer-events: none;
+    }
+
+    .sv-shell::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(11, 107, 46, 0.18), transparent 70%);
+      bottom: -160px;
+      left: -60px;
+      pointer-events: none;
+    }
+
+    .sv-header {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+      margin-bottom: 16px;
+    }
+
+    .sv-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sv-logo-wrap {
+      width: 50px;
+      height: 50px;
+      border-radius: 18px;
+      background: radial-gradient(circle at 30% 30%, #ffffff 0, #ffe4cc 40%, #e57200 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(229, 114, 0, 0.45);
+      animation: sv-popin 0.6s ease-out;
+    }
+
+    .sv-logo-wrap img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+
+    .sv-brand-text-main {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--sv-text-main);
+    }
+
+    .sv-brand-text-sub {
+      font-size: 12px;
+      color: var(--sv-text-sub);
+    }
+
+    .sv-badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(11, 107, 46, 0.08);
+      color: var(--sv-green);
+      font-size: 12px;
+      font-weight: 500;
+      backdrop-filter: blur(8px);
+    }
+
+    .sv-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.35);
+      animation: sv-pulse 1.8s infinite;
+    }
+
+    @keyframes sv-pulse {
+      0% { transform: scale(1); opacity: 1; }
+      70% { transform: scale(1.9); opacity: 0; }
+      100% { transform: scale(1.9); opacity: 0; }
+    }
+
+    @keyframes sv-popin {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .sv-layout {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.7fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 940px) {
+      .sv-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .sv-card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: var(--radius-card);
+      padding: 14px 14px 16px;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+      animation: sv-fade-up 0.45s ease-out;
+    }
+
+    .sv-card.secondary {
+      background: #ffffff;
+    }
+
+    @keyframes sv-fade-up {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .sv-step-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+      align-items: flex-start;
+    }
+
+    .sv-step-title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--sv-text-sub);
+      font-weight: 600;
+    }
+
+    .sv-step-badge {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--sv-orange), #ff9f3f);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 700;
+      box-shadow: 0 7px 18px rgba(229, 114, 0, 0.4);
+    }
+
+    .sv-card-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--sv-text-main);
+      margin-top: 4px;
+    }
+
+    .sv-card-sub {
+      font-size: 11px;
+      color: var(--sv-text-sub);
+      margin-top: 3px;
+    }
+
+    .sv-badge-soft {
+      font-size: 10px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(248, 250, 252, 0.95);
+      color: var(--sv-text-sub);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .sv-upload-grid {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    @media (max-width: 640px) {
+      .sv-upload-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .sv-upload-tile {
+      border-radius: 16px;
+      border: 1px dashed rgba(148, 163, 184, 0.9);
+      background: #f9fafb;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sv-upload-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #4b5563;
+    }
+
+    .sv-upload-preview {
+      border-radius: 12px;
+      background: #e5e7eb;
+      min-height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .sv-upload-preview span {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .sv-upload-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .sv-upload-preview:hover img {
+      transform: scale(1.03);
+    }
+
+    .sv-upload-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .sv-btn-upload {
+      position: relative;
+      overflow: hidden;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      padding: 6px 12px;
+      background: #ffffff;
+      font-size: 11px;
+      font-weight: 500;
+      color: #374151;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: transform 0.08s ease, box-shadow 0.12s ease;
+    }
+
+    .sv-btn-upload:hover {
+      box-shadow: 0 8px 18px rgba(148, 163, 184, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .sv-btn-upload:active {
+      transform: scale(0.97);
+      box-shadow: none;
+    }
+
+    .sv-btn-upload input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .sv-hint-small {
+      font-size: 10px;
+      color: #9ca3af;
+    }
+
+    .sv-actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .sv-btn-main,
+    .sv-btn-alt {
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.1s ease, box-shadow 0.15s ease, filter 0.1s ease;
+    }
+
+    .sv-btn-main {
+      background: linear-gradient(135deg, #ff8a3d, var(--sv-orange));
+      color: #ffffff;
+      box-shadow: 0 10px 22px rgba(229, 114, 0, 0.5);
+    }
+
+    .sv-btn-alt {
+      background: #ffffff;
+      color: var(--sv-green);
+      border: 1px solid rgba(11, 107, 46, 0.4);
+    }
+
+    .sv-btn-main:hover,
+    .sv-btn-alt:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.25);
+    }
+
+    .sv-btn-main:active,
+    .sv-btn-alt:active {
+      transform: scale(0.97);
+      box-shadow: none;
+      filter: brightness(0.97);
+    }
+
+    .sv-form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 14px;
+    }
+
+    @media (max-width: 720px) {
+      .sv-form-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .sv-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .sv-field.full {
+      grid-column: 1 / -1;
+    }
+
+    .sv-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: #4b5563;
+    }
+
+    .sv-label.required::after {
+      content: " *";
+      color: #ef4444;
+    }
+
+    .sv-input,
+    .sv-select,
+    .sv-textarea {
+      border-radius: 10px;
+      border: 1px solid rgba(209, 213, 219, 0.95);
+      padding: 7px 10px;
+      font-size: 12px;
+      outline: none;
+      background: #f9fafb;
+      width: 100%;
+      transition: border-color 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    }
+
+    .sv-input:focus,
+    .sv-select:focus,
+    .sv-textarea:focus {
+      border-color: var(--sv-orange);
+      box-shadow: 0 0 0 1px rgba(229, 114, 0, 0.25);
+      background: #ffffff;
+    }
+
+    .sv-select {
+      appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, #9ca3af 50%),
+        linear-gradient(135deg, #9ca3af 50%, transparent 50%);
+      background-position:
+        calc(100% - 16px) calc(50% + 1px),
+        calc(100% - 12px) calc(50% + 1px);
+      background-size: 4px 4px, 4px 4px;
+      background-repeat: no-repeat;
+    }
+
+    .sv-textarea {
+      min-height: 60px;
+      resize: vertical;
+    }
+
+    .sv-footer {
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .sv-status {
+      font-size: 11px;
+      color: var(--sv-text-sub);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sv-status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #9ca3af;
+    }
+
+    .sv-status-dot.ok {
+      background: #22c55e;
+    }
+
+    .sv-status-dot.err {
+      background: #ef4444;
+    }
+
+    .sv-btn-reset,
+    .sv-btn-submit {
+      border-radius: 999px;
+      padding: 7px 13px;
+      font-size: 12px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+
+    .sv-btn-reset {
+      background: #ffffff;
+      color: #374151;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+    }
+
+    .sv-btn-submit {
+      background: linear-gradient(135deg, #22c55e, #0b6b2e);
+      color: #ffffff;
+      box-shadow: 0 10px 24px rgba(11, 107, 46, 0.4);
+    }
+
+    .sv-btn-reset:hover,
+    .sv-btn-submit:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.22);
+    }
+
+    .sv-btn-reset:active,
+    .sv-btn-submit:active {
+      transform: scale(0.97);
+      box-shadow: none;
+    }
+
+    .sv-btn-submit:disabled {
+      opacity: 0.8;
+      cursor: default;
+      box-shadow: none;
+    }
+
+    canvas#sv-qr-canvas {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<div class="sv-shell" id="sv-app-root">
+  <header class="sv-header">
+    <div class="sv-brand">
+      <div class="sv-logo-wrap">
+        <!-- Thay src bên dưới bằng link/logo thật của Sen Việt Group -->
+        <img src="https://1drv.ms/i/c/bbe206870487ec7b/IQDncyHabNbQQ5kkQQmTLrf0AZIOVW7hEaM6QCrRa_ddNdI?e=mm7qXH" alt="Sen Việt Group" />
+      </div>
+      <div>
+        <div class="sv-brand-text-main">Đăng ký tuyển dụng · Sen Việt Group</div>
+        <div class="sv-brand-text-sub">Quét CCCD (QR + OCR Vision) · Tự điền form · Gửi Webhook N8N</div>
+      </div>
+    </div>
+    <div class="sv-badge-status">
+      <span class="sv-badge-dot"></span>
+      <span>Webhook N8N & Google Vision đang sẵn sàng</span>
+    </div>
+  </header>
+
+  <main class="sv-layout">
+    <!-- CỘT TRÁI: UPLOAD + QR + OCR -->
+    <section class="sv-card">
+      <div class="sv-step-head">
+        <div>
+          <div class="sv-step-title">
+            <span class="sv-step-badge">1</span>
+            Tải ảnh CCCD & đọc dữ liệu
+          </div>
+          <div class="sv-card-title">Ảnh mặt trước & mặt sau</div>
+          <div class="sv-card-sub">
+            Ưu tiên quét mã QR từ mặt trước. Nếu QR mờ hoặc bị che, dùng OCR Google Vision để đọc toàn bộ thông tin.
+          </div>
+        </div>
+      </div>
+
+      <div class="sv-upload-grid">
+        <div class="sv-upload-tile">
+          <div class="sv-upload-label">Mặt trước CCCD</div>
+          <div class="sv-upload-preview" id="sv-preview-front">
+            <span>Chưa chọn ảnh</span>
+          </div>
+          <div class="sv-upload-actions">
+            <label class="sv-btn-upload">
+              📁 Chọn ảnh mặt trước
+              <input type="file" id="sv-file-front" accept="image/*" />
+            </label>
+            <span class="sv-hint-small">Ảnh rõ, không loá, thấy mã QR.</span>
+          </div>
+        </div>
+
+        <div class="sv-upload-tile">
+          <div class="sv-upload-label">Mặt sau CCCD</div>
+          <div class="sv-upload-preview" id="sv-preview-back">
+            <span>Chưa chọn ảnh</span>
+          </div>
+          <div class="sv-upload-actions">
+            <label class="sv-btn-upload">
+              📁 Chọn ảnh mặt sau
+              <input type="file" id="sv-file-back" accept="image/*" />
+            </label>
+            <span class="sv-hint-small">Dùng cho OCR & lưu hồ sơ.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sv-actions-row">
+        <button type="button" class="sv-btn-main" id="sv-btn-scan-qr">
+          📷 Quét mã QR từ ảnh mặt trước
+        </button>
+        <button type="button" class="sv-btn-alt" id="sv-btn-ocr">
+          🤖 OCR CCCD bằng Google Vision
+        </button>
+      </div>
+
+      <canvas id="sv-qr-canvas"></canvas>
+    </section>
+
+    <!-- CỘT PHẢI: FORM THÔNG TIN -->
+    <section class="sv-card secondary">
+      <div class="sv-step-head">
+        <div>
+          <div class="sv-step-title">
+            <span class="sv-step-badge">2</span>
+            Kiểm tra & chỉnh sửa thông tin
+          </div>
+          <div class="sv-card-title">Thông tin ứng viên</div>
+        </div>
+        <span class="sv-badge-soft">Tự điền từ QR / OCR · Có thể chỉnh sửa tay trước khi gửi</span>
+      </div>
+
+      <div class="sv-form-grid">
+        <div class="sv-field">
+          <label class="sv-label required">Số CCCD</label>
+          <input class="sv-input" id="So_CCCD" />
+        </div>
+        <div class="sv-field">
+          <label class="sv-label">Số CMND (nếu có)</label>
+          <input class="sv-input" id="So_CMND" />
+        </div>
+
+        <div class="sv-field full">
+          <label class="sv-label required">Họ và tên</label>
+          <input class="sv-input" id="HoTen" />
+        </div>
+
+        <div class="sv-field">
+          <label class="sv-label required">Giới tính</label>
+          <select class="sv-select" id="GioiTinh">
+            <option value="">-- Chọn --</option>
+            <option value="Nam">Nam</option>
+            <option value="Nữ">Nữ</option>
+            <option value="Khác">Khác</option>
+          </select>
+        </div>
+
+        <div class="sv-field">
+          <label class="sv-label required">Ngày sinh</label>
+          <input type="date" class="sv-input" id="NgaySinh" />
+        </div>
+
+        <div class="sv-field">
+          <label class="sv-label required">Quốc tịch</label>
+          <input class="sv-input" id="QuocTich" value="Việt Nam" />
+        </div>
+
+        <div class="sv-field">
+          <label class="sv-label">Quê quán</label>
+          <input class="sv-input" id="QueQuan" />
+        </div>
+
+        <div class="sv-field full">
+          <label class="sv-label required">Nơi thường trú</label>
+          <input class="sv-input" id="NoiThuongTru" />
+        </div>
+
+        <div class="sv-field">
+          <label class="sv-label">Ngày cấp CCCD</label>
+          <input type="date" class="sv-input" id="NgayCap" />
+        </div>
+
+        <div class="sv-field">
+          <label class="sv-label">Nơi cấp</label>
+          <input class="sv-input" id="NoiCap" />
+        </div>
+
+        <div class="sv-field">
+          <label class="sv-label">Số điện thoại</label>
+          <input class="sv-input" id="SoDienThoai" />
+        </div>
+
+        <div class="sv-field">
+          <label class="sv-label">Nhà máy đăng ký</label>
+          <select class="sv-cccd-select" id="NhaMay">
+  <option value="">-- Chọn nhà máy --</option>
+
+  <optgroup label="AAC">
+    <option value="AAC">AAC</option>
+  </optgroup>
+
+  <optgroup label="GoerTek">
+    <option value="GOERTEK-LENS">LENS</option>
+    <option value="GOERTEK-QC1">QC1</option>
+    <option value="GOERTEK-QC2&3">QC2&3</option>
+    <option value="GOERTEK-VT">VT</option>
+  </optgroup>
+
+  <optgroup label="HONHAI / FOXCONN">
+    <option value="HONHAI-FY">FY</option>
+    <option value="HONHAI-FK">FK</option>
+    <option value="HONHAI-FL">FL</option>
+  </optgroup>
+
+  <optgroup label="LUXSHARE">
+    <option value="LUXE-QC1">QC1</option>
+    <option value="LUXE-QC2&3">QC2&3</option>
+    <option value="LUXE-VT">VT</option>
+  </optgroup>
+
+  <optgroup label="GTK">
+    <option value="GTK-QUEVO">Quế Võ</option>
+    <option value="GTK-NAMSON">Nam Sơn</option>
+  </optgroup>
+
+  <optgroup label="Khác">
+    <option value="NEWING">NEWING</option>
+    <option value="BLUEWAY">BLUEWAY</option>
+    <option value="Khác">Khác</option>
+  </optgroup>
+</select>
+
+        </div>
+
+        <div class="sv-field">
+          <label class="sv-label">Nhà cung cấp</label>
+          <select class="sv-cccd-select" id="NhaCungCap">
+  <option value="">-- Chọn NCC --</option>
+
+  <!-- Sen Việt Group -->
+  <optgroup label="Sen Việt Group">
+    <option value="Sen Việt">Sen Việt</option>
+    <option value="Sen Việt 01">Sen Việt 01</option>
+    <option value="Sen Việt 02">Sen Việt 02</option>
+    <option value="Sen Việt 03">Sen Việt 03</option>
+    <option value="Sen Việt 04">Sen Việt 04</option>
+    <option value="Sen Việt 05">Sen Việt 05</option>
+    <option value="Sen Việt 06">Sen Việt 06</option>
+    <option value="Sen Việt 07">Sen Việt 07</option>
+    <option value="Sen Việt 08">Sen Việt 08</option>
+    <option value="Sen Việt 09">Sen Việt 09</option>
+    <option value="Sen Việt 10">Sen Việt 10</option>
+  </optgroup>
+
+  <!-- Khác -->
+  <optgroup label="Khác">
+    <option value="NCC nội bộ">NCC nội bộ</option>
+    <option value="Đối tác khác">Đối tác khác</option>
+  </optgroup>
+</select>
+
+        </div>
+
+        <div class="sv-field">
+          <label class="sv-label">Ngày phỏng vấn</label>
+          <input type="date" class="sv-input" id="NgayPhongVan" />
+        </div>
+
+        <div class="sv-field full">
+          <label class="sv-label">Ghi chú</label>
+          <textarea class="sv-textarea" id="GhiChu"></textarea>
+        </div>
+      </div>
+
+      <div class="sv-footer">
+        <div class="sv-status">
+          <span class="sv-status-dot" id="sv-status-dot"></span>
+          <span id="sv-status-text">Chưa gửi dữ liệu. Hãy quét QR / OCR, kiểm tra thông tin rồi bấm "Gửi về hệ thống".</span>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button type="button" class="sv-btn-reset" id="sv-btn-reset">🔄 Xoá form</button>
+          <button type="button" class="sv-btn-submit" id="sv-btn-submit">🚀 Gửi về hệ thống</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- jsQR để đọc mã QR -->
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+<script>
+(function() {
+  const WEBHOOK_URL = "https://senvietgroup.com/webhook-test/2b48614c-95af-4845-9a63-282889dbe6f0";
+  const VISION_API_KEY = "AIzaSyB2JUVRGd-oREdyYyvznfiZ0WAFldr8Mic";
+
+  let frontImageDataUrl = "";
+  let backImageDataUrl  = "";
+
+  const fileFront = document.getElementById("sv-file-front");
+  const fileBack  = document.getElementById("sv-file-back");
+  const previewFront = document.getElementById("sv-preview-front");
+  const previewBack  = document.getElementById("sv-preview-back");
+  const canvas = document.getElementById("sv-qr-canvas");
+  const ctx = canvas.getContext("2d");
+
+  const statusDot  = document.getElementById("sv-status-dot");
+  const statusText = document.getElementById("sv-status-text");
+  const btnSubmit  = document.getElementById("sv-btn-submit");
+
+  function setStatus(msg, type) {
+    statusText.textContent = msg;
+    statusDot.classList.remove("ok", "err");
+    if (type === "ok") statusDot.classList.add("ok");
+    if (type === "err") statusDot.classList.add("err");
+  }
+
+  function handleImageUpload(input, preview, isFront) {
+    const file = input.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const img = new Image();
+      img.onload = function() {
+        preview.innerHTML = "";
+        preview.appendChild(img);
+        if (isFront) frontImageDataUrl = e.target.result;
+        else backImageDataUrl = e.target.result;
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  fileFront.addEventListener("change", () => handleImageUpload(fileFront, previewFront, true));
+  fileBack .addEventListener("change", () => handleImageUpload(fileBack, previewBack, false));
+
+  function normalizeDateToInput(raw) {
+    if (!raw) return "";
+    raw = raw.trim();
+
+    if (raw.includes("/")) {
+      const [d, m, y] = raw.split(/[\/]/);
+      if (d && m && y) {
+        return `${y.padStart(4,"0")}-${m.padStart(2,"0")}-${d.padStart(2,"0")}`;
+      }
+    }
+
+    if (/^\d{8}$/.test(raw)) {
+      const d = raw.slice(0,2),
+            m = raw.slice(2,4),
+            y = raw.slice(4);
+      return `${y}-${m}-${d}`;
+    }
+
+    const m = raw.match(/(\d{2})[.\-](\d{2})[.\-](\d{4})/);
+    if (m) {
+      return `${m[3]}-${m[2]}-${m[1]}`;
+    }
+    return "";
+  }
+
+  // --- PARSE QR: định dạng CCCD|CMND|HoTen|ddMMyyyy|GioiTinh|NoiThuongTru|ddMMyyyy
+  function parseQR(text) {
+    const parts = text.split("|").map(p => p.trim());
+    const obj = {
+      So_CCCD: parts[0] || "",
+      So_CMND: parts[1] || "",
+      HoTen:   parts[2] || "",
+      NgaySinh: normalizeDateToInput(parts[3] || ""),
+      GioiTinh: parts[4] || "",
+      NoiThuongTru: parts[5] || "",
+      NgayCap: normalizeDateToInput(parts[6] || "")
+    };
+
+    if (obj.NoiThuongTru) {
+      const arr = obj.NoiThuongTru.split(",").map(s => s.trim());
+      obj.NoiCap = arr[arr.length - 1] || "";
+    } else obj.NoiCap = "";
+
+    return obj;
+  }
+
+  function fillForm(parsed) {
+    if (!parsed) return;
+    if (parsed.So_CCCD)      document.getElementById("So_CCCD").value      = parsed.So_CCCD;
+    if (parsed.So_CMND)      document.getElementById("So_CMND").value      = parsed.So_CMND;
+    if (parsed.HoTen)        document.getElementById("HoTen").value        = parsed.HoTen;
+    if (parsed.GioiTinh)     document.getElementById("GioiTinh").value     = parsed.GioiTinh;
+    if (parsed.NgaySinh)     document.getElementById("NgaySinh").value     = parsed.NgaySinh;
+    if (parsed.NoiThuongTru) document.getElementById("NoiThuongTru").value = parsed.NoiThuongTru;
+    if (parsed.QueQuan)      document.getElementById("QueQuan").value      = parsed.QueQuan;
+    if (parsed.NgayCap)      document.getElementById("NgayCap").value      = parsed.NgayCap;
+    if (parsed.NoiCap)       document.getElementById("NoiCap").value       = parsed.NoiCap;
+  }
+
+  // --- QUÉT QR TỪ ẢNH MẶT TRƯỚC ---
+  document.getElementById("sv-btn-scan-qr").addEventListener("click", () => {
+    const file = fileFront.files[0];
+    if (!file) {
+      alert("Vui lòng chọn ảnh mặt trước CCCD trước khi quét QR.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = function() {
+        const maxSize = 900;
+        let w = img.width, h = img.height;
+        const ratio = Math.min(maxSize / w, maxSize / h, 1);
+        w = Math.round(w * ratio);
+        h = Math.round(h * ratio);
+
+        canvas.width = w;
+        canvas.height = h;
+        ctx.drawImage(img, 0, 0, w, h);
+        const imageData = ctx.getImageData(0, 0, w, h);
+        const code = jsQR(imageData.data, imageData.width, imageData.height);
+
+        if (code && code.data) {
+          try {
+            const parsed = parseQR(code.data);
+            fillForm(parsed);
+            setStatus("Đã quét QR thành công. Vui lòng kiểm tra lại họ tên, ngày sinh, địa chỉ trước khi gửi.", "ok");
+          } catch (err) {
+            console.error(err);
+            alert("Đọc QR được nhưng không phân tích được dữ liệu.");
+            setStatus("Lỗi phân tích dữ liệu từ QR.", "err");
+          }
+        } else {
+          alert("Không tìm thấy mã QR trong ảnh. Vui lòng thử lại với ảnh rõ hơn hoặc dùng OCR.");
+          setStatus("Không tìm thấy mã QR trong ảnh mặt trước.", "err");
+        }
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // --- GỌI VISION OCR ---
+  async function callVision(dataUrl) {
+    const base64 = dataUrl.split(",")[1];
+    const body = {
+      requests: [{
+        image: { content: base64 },
+        features: [{ type: "TEXT_DETECTION" }]
+      }]
+    };
+
+    const res = await fetch("https://vision.googleapis.com/v1/images:annotate?key=" + VISION_API_KEY, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    });
+
+    if (!res.ok) throw new Error("Vision HTTP " + res.status);
+    const json = await res.json();
+    const ann = json.responses && json.responses[0] && json.responses[0].fullTextAnnotation;
+    return ann ? (ann.text || "") : "";
+  }
+
+  function extractFirst(text, regex) {
+    const m = text.match(regex);
+    return m ? m[0] : "";
+  }
+
+  function extractLineAfter(text, labelRegex) {
+    const lines = text.split(/\r?\n/);
+    for (let i = 0; i < lines.length; i++) {
+      if (labelRegex.test(lines[i])) {
+        if (i + 1 < lines.length) return lines[i + 1].trim();
+      }
+    }
+    return "";
+  }
+
+  // Tìm dòng tên: ưu tiên dòng sau "Họ, chữ đệm và tên khai sinh / Full name"
+  function extractName(frontText, allText) {
+    const source = frontText || allText;
+    const lines = source.split(/\r?\n/);
+
+    let name = extractLineAfter(source, /(Họ[, ]+chữ đệm.*tên|Họ và tên|Full name)/i);
+    if (name) return name.trim();
+
+    // fallback: lấy dòng nhiều chữ in hoa, gần dòng có "Ngày sinh"
+    let idxDob = -1;
+    for (let i = 0; i < lines.length; i++) {
+      if (/Ngày[, ]*tháng[, ]*năm\s*sinh|Date of birth/i.test(lines[i])) {
+        idxDob = i;
+        break;
+      }
+    }
+
+    let best = "";
+    lines.forEach((line, i) => {
+      const cleaned = line.replace(/[^A-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐƠƯẠ-Ỹa-zàáâãèéêìíòóôõùúăđơưạ-ỹ\s]/g, "").trim();
+      if (!cleaned) return;
+      if (/CĂN CƯỚC|Công Hòa|CỘNG HÒA/i.test(cleaned)) return;
+      if (/Nam\s+Quốc tịch|Citizen Identity Card/i.test(cleaned)) return;
+      if (/\d/.test(cleaned)) return;
+
+      const words = cleaned.split(/\s+/);
+      if (words.length < 2 || words.length > 6) return;
+
+      let score = cleaned.length;
+      if (idxDob !== -1) {
+        score -= Math.abs(idxDob - i) * 3;
+      }
+      if (score > best.length) best = cleaned;
+    });
+
+    return best.trim();
+  }
+// Tìm ngày sinh trong text OCR
+function detectBirthDate(text) {
+  const lines = text.split(/\r?\n/);
+  const candidates = [];
+  const currentYear = new Date().getFullYear();
+
+  // Tìm dạng dd/mm/yyyy, dd-mm-yyyy, dd.mm.yyyy
+  lines.forEach((line, idx) => {
+    const matches = line.match(/\b(\d{2})[\/.\-](\d{2})[\/.\-](\d{4})\b/g);
+    if (matches) {
+      matches.forEach(str => {
+        const m = str.match(/(\d{2})[\/.\-](\d{2})[\/.\-](\d{4})/);
+        if (!m) return;
+        const d = m[1], mo = m[2], y = parseInt(m[3], 10);
+        if (y < 1950 || y > currentYear - 15) return; // tránh 2028, 2030...
+
+        // Ngữ cảnh (dòng trước + hiện tại + dòng sau)
+        let ctx = line;
+        if (lines[idx - 1]) ctx = lines[idx - 1] + " " + ctx;
+        if (lines[idx + 1]) ctx = ctx + " " + lines[idx + 1];
+
+        let score = 0;
+        if (/(sinh|birth|date of birth|DOB)/i.test(ctx)) score += 10; // ưu tiên có chữ "sinh"
+        if (/(cấp|issue|expiry|hết hạn|valid until)/i.test(ctx)) score -= 5; // trừ điểm các ngày cấp / hết hạn
+
+        // hơi ưu tiên các năm nhỏ hơn (ngày sinh thường xa hiện tại)
+        score += (currentYear - y) * 0.01;
+
+        candidates.push({
+          raw: str,
+          d, mo, y,
+          score
+        });
+      });
+    }
+  });
+
+  // Thêm dạng 8 số d d m m y y y y (ít gặp nhưng phòng trường hợp)
+  const match8 = text.match(/\b\d{8}\b/g) || [];
+  match8.forEach(raw => {
+    const d = raw.slice(0, 2),
+          mo = raw.slice(2, 4),
+          y  = parseInt(raw.slice(4), 10);
+    if (y < 1950 || y > currentYear - 15) return;
+    candidates.push({
+      raw,
+      d, mo, y,
+      score: 1 // không có ngữ cảnh, score thấp
+    });
+  });
+
+  if (candidates.length === 0) return "";
+
+  // Chọn candidate có score cao nhất
+  candidates.sort((a, b) => b.score - a.score);
+  const best = candidates[0];
+  return `${best.d}/${best.mo}/${best.y}`;
+}
+
+  function parseFromOcr(frontText, backText) {
+    const all = (frontText || "") + "\n" + (backText || "");
+    const data = {};
+
+    // Số CCCD 12 số
+    data.So_CCCD = extractFirst(all, /\b\d{12}\b/);
+
+    // CMND 9 số (khác với CCCD)
+    const nine = all.match(/\b\d{9}\b/g);
+    if (nine) {
+      const cmnd = nine.find(n => n !== data.So_CCCD.slice(-9));
+      data.So_CMND = cmnd || "";
+    } else data.So_CMND = "";
+
+      // Ngày sinh – dùng detectBirthDate để tránh nhầm ngày cấp / hết hạn
+  const dobRaw = detectBirthDate(all);
+  data.NgaySinh = normalizeDateToInput(dobRaw);
+
+
+    // Giới tính
+    if (/Nam\b/i.test(all)) data.GioiTinh = "Nam";
+    else if (/Nữ\b/i.test(all)) data.GioiTinh = "Nữ";
+    else data.GioiTinh = "";
+
+    // Họ tên
+    data.HoTen = extractName(frontText, all);
+
+    // Quê quán
+    let que = extractLineAfter(all, /(Quê quán|Place of origin)/i);
+    if (!que) {
+      const mQue = all.match(/(Quê quán|Place of origin)[: ]*(.*)/i);
+      if (mQue) que = mQue[2].trim();
+    }
+    data.QueQuan = que;
+
+    // Nơi thường trú
+    let noitt = extractLineAfter(all, /(Nơi cư trú|Nơi thường trú|Place of residence)/i);
+    if (!noitt) {
+      const mNt = all.match(/(Nơi cư trú|Nơi thường trú|Place of residence)[: ]*(.*)/i);
+      if (mNt) noitt = mNt[2].trim();
+    }
+    data.NoiThuongTru = noitt;
+
+    // Ngày cấp
+    let ngayCapLine = extractLineAfter(all, /(Ngày[, ]*tháng[, ]*năm\s*cấp|Date of issue)/i);
+    let ngayCap = extractFirst(ngayCapLine, /\d{2}[\/.\-]\d{2}[\/.\-]\d{4}/);
+    if (!ngayCap) {
+      const dates = all.match(/\d{2}[\/.\-]\d{2}[\/.\-]\d{4}/g);
+      if (dates && dates.length >= 2) ngayCap = dates[dates.length - 1];
+    }
+    data.NgayCap = normalizeDateToInput(ngayCap);
+
+    // Nơi cấp (Công an / Bộ công an / Cục cảnh sát)
+    let noiCap = "";
+    const mCA = all.match(/(CÔNG AN.*|Công an.*|BỘ CÔNG AN.*|Bộ Công an.*|CỤC CẢNH SÁT.*)/i);
+    if (mCA) noiCap = mCA[1].trim();
+    data.NoiCap = noiCap;
+
+    return data;
+  }
+
+  // --- NÚT OCR ---
+  document.getElementById("sv-btn-ocr").addEventListener("click", async () => {
+    if (!frontImageDataUrl && !backImageDataUrl) {
+      alert("Vui lòng chọn ít nhất 1 ảnh CCCD trước khi OCR.");
+      return;
+    }
+    try {
+      setStatus("Đang gửi ảnh lên Google Vision OCR...", "ok");
+
+      const [frontText, backText] = await Promise.all([
+        frontImageDataUrl ? callVision(frontImageDataUrl) : Promise.resolve(""),
+        backImageDataUrl ? callVision(backImageDataUrl) : Promise.resolve("")
+      ]);
+
+      if ((!frontText || !frontText.trim()) && (!backText || !backText.trim())) {
+        setStatus("OCR không đọc được chữ từ ảnh. Vui lòng kiểm tra lại độ nét.", "err");
+        alert("OCR không đọc được nội dung. Hãy thử ảnh khác rõ hơn.");
+        return;
+      }
+
+      const parsed = parseFromOcr(frontText, backText);
+      fillForm(parsed);
+      setStatus("Đã OCR thành công. Vui lòng kiểm tra kỹ HỌ TÊN, NGÀY SINH, NƠI THƯỜNG TRÚ trước khi gửi.", "ok");
+    } catch (err) {
+      console.error(err);
+      setStatus("Lỗi khi gọi Google Vision OCR: " + err.message, "err");
+      alert("Lỗi OCR: " + err.message);
+    }
+  });
+
+  function collectFormData() {
+    return {
+      Timestamp: new Date().toISOString(),
+      So_CCCD: document.getElementById("So_CCCD").value.trim(),
+      So_CMND: document.getElementById("So_CMND").value.trim(),
+      HoTen: document.getElementById("HoTen").value.trim(),
+      GioiTinh: document.getElementById("GioiTinh").value,
+      NgaySinh: document.getElementById("NgaySinh").value,
+      QuocTich: document.getElementById("QuocTich").value.trim(),
+      QueQuan: document.getElementById("QueQuan").value.trim(),
+      NoiThuongTru: document.getElementById("NoiThuongTru").value.trim(),
+      NgayCap: document.getElementById("NgayCap").value,
+      NoiCap: document.getElementById("NoiCap").value.trim(),
+      SoDienThoai: document.getElementById("SoDienThoai").value.trim(),
+      NhaMay: document.getElementById("NhaMay").value,
+      NhaCungCap: document.getElementById("NhaCungCap").value,
+      NgayPhongVan: document.getElementById("NgayPhongVan").value,
+      GhiChu: document.getElementById("GhiChu").value.trim(),
+      LinkMatTruoc: frontImageDataUrl || "",
+      LinkMatSau: backImageDataUrl || ""
+    };
+  }
+
+  // --- GỬI WEBHOOK ---
+  document.getElementById("sv-btn-submit").addEventListener("click", async () => {
+    const data = collectFormData();
+
+    if (!data.So_CCCD || !data.HoTen) {
+      if (!confirm("Chưa có Số CCCD hoặc Họ tên. Bạn vẫn muốn gửi dữ liệu?")) {
+        return;
+      }
+    }
+
+    try {
+      btnSubmit.disabled = true;
+      setStatus("Đang gửi dữ liệu lên Webhook N8N...", "ok");
+
+      const res = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      setStatus("Gửi thành công! Dữ liệu đã được đẩy sang N8N.", "ok");
+      alert("Đã gửi dữ liệu sang hệ thống N8N thành công.");
+    } catch (err) {
+      console.error(err);
+      setStatus("Lỗi khi gửi Webhook: " + err.message, "err");
+      alert("Lỗi gửi Webhook: " + err.message);
+    } finally {
+      btnSubmit.disabled = false;
+    }
+  });
+
+  // --- RESET FORM ---
+  document.getElementById("sv-btn-reset").addEventListener("click", () => {
+    [
+      "So_CCCD","So_CMND","HoTen","NgaySinh","QuocTich","QueQuan",
+      "NoiThuongTru","NgayCap","NoiCap","SoDienThoai","NgayPhongVan","GhiChu"
+    ].forEach(id => {
+      document.getElementById(id).value = "";
+    });
+
+    document.getElementById("GioiTinh").value = "";
+    document.getElementById("NhaMay").value = "";
+    document.getElementById("NhaCungCap").value = "";
+
+    fileFront.value = "";
+    fileBack.value  = "";
+    previewFront.innerHTML = "<span>Chưa chọn ảnh</span>";
+    previewBack.innerHTML  = "<span>Chưa chọn ảnh</span>";
+    frontImageDataUrl = "";
+    backImageDataUrl  = "";
+
+    setStatus("Đã làm mới form. Bạn có thể quét CCCD khác.", "");
+  });
+
+})();
+</script>
+</body>
+</html>
